@@ -2,7 +2,7 @@
 
 // Default constructor
 Monitor::Monitor () :
-mMode (Monitor::UNKNOWN), mSize (0.f) {
+mMode (Monitor::UNKNOWN), mSize (0) {
 
 #ifdef TESTPR
     std::cout << "Default Monitor constructor used.\n";

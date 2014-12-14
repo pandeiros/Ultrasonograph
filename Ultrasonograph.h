@@ -2,6 +2,7 @@
 #define ULTRASONOGRAPH
 
 #include <iostream>
+#include <string>
 #include "Monitor.h"
 #include "DiagnosedOrgan.h"
 
@@ -15,6 +16,12 @@ public:
         _4D
     };
 
+    // Object instance counter and getter
+    static unsigned long ObjectCount;
+    static unsigned long getObjectCount () {
+        return ObjectCount;
+    };
+
     // Default constructor
     Ultrasonograph ();
 
@@ -22,7 +29,8 @@ public:
     Ultrasonograph (Ultrasonograph & other);
     
     // Parameter constructor
-    Ultrasonograph (const Mode mode, const bool hasGelHeater, const std::string modelName, Monitor monitor, DiagnosedOrgan * organ = nullptr);
+    Ultrasonograph (const Mode mode, const bool hasGelHeater, const std::string modelName, 
+                    Monitor & monitor, DiagnosedOrgan * organ = nullptr);
 
     // Default destructor
     ~Ultrasonograph ();
@@ -57,7 +65,32 @@ private:
     DiagnosedOrgan * pOrgan;
 
     // Output stream operator
-    friend std::ostream& operator<< (std::ostream & out, Ultrasonograph & object);
+    friend std::ostream & operator<< (std::ostream & out, Ultrasonograph & object) {
+        out << "Ultrasonograph : ";
+        out << object.getModelName();
+        out << ", ";
+
+        switch (object.mMode) {
+            case Ultrasonograph::_2D : 
+                out << "2D"; break;
+            case Ultrasonograph::_3D :
+                out << "3D"; break;
+            case Ultrasonograph::_4D :
+                out << "4D"; break;
+            default :
+                out << "unknown"; break;
+        }
+
+        out << " mode";
+
+        if (object.hasGelHeater)            
+           out << " (Gel heater included)";
+
+        out << std::endl;
+        //out << object.mMonitor << *object.pOrgan;
+          
+        return out;
+    }
 };
 
 #endif

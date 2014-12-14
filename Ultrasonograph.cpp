@@ -1,9 +1,14 @@
 #include "Ultrasonograph.h"
 
+// Static initializer
+unsigned long Ultrasonograph::ObjectCount = 0;
+
 // Default constructor
 Ultrasonograph::Ultrasonograph () :
 mMode (Ultrasonograph::UNKNOWN), hasGelHeater (false), mModelName ("Unknown model name"),
-mMonitor (Monitor ()), pOrgan (new DiagnosedOrgan) {
+mMonitor (Monitor ()), pOrgan (nullptr) {
+
+    ++ObjectCount;
 
 #ifdef TESTPR
     std::cout << "Default Ultrasonograph constructor used.\n";
@@ -20,6 +25,8 @@ Ultrasonograph::Ultrasonograph (Ultrasonograph & other) {
     this->mMonitor = other.mMonitor;
     this->pOrgan = other.pOrgan;
 
+    ++ObjectCount;
+
 #ifdef TESTPR
     std::cout << "Copying Ultrasonograph constructor used.\n";
 #endif
@@ -28,9 +35,11 @@ Ultrasonograph::Ultrasonograph (Ultrasonograph & other) {
 
 // Parameter constructor
 Ultrasonograph::Ultrasonograph (const Mode mode, const bool hasGelHeater, const std::string modelName,
-                                Monitor monitor, DiagnosedOrgan * organ) :
+                                Monitor & monitor, DiagnosedOrgan * organ) :
                                 mMode (mode), hasGelHeater (hasGelHeater), mModelName (modelName),
                                 mMonitor (monitor), pOrgan (organ) {
+
+    ++ObjectCount;
 
 #ifdef TESTPR
     std::cout << "Parameter Ultrasonograph constructor used.\n";
@@ -40,7 +49,8 @@ Ultrasonograph::Ultrasonograph (const Mode mode, const bool hasGelHeater, const 
 
 // Default destructor
 Ultrasonograph::~Ultrasonograph () {
-    delete pOrgan;
+  
+    --ObjectCount;
 
 #ifdef TESTPR
     std::cout << "Drfault Ultrasonograph destructor used.\n";
