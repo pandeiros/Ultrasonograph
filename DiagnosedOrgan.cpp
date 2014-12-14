@@ -4,54 +4,83 @@
 std::map <DiagnosedOrgan::Organ, float> DiagnosedOrgan::mapOrganWaveRange = std::map <DiagnosedOrgan::Organ, float> ();
 
 // Default constructor
-DiagnosedOrgan::DiagnosedOrgan () {
+DiagnosedOrgan::DiagnosedOrgan () :
+mOrgan (DiagnosedOrgan::UNKNOWN), mFrequency (DiagnosedOrgan::UNKNOWN) {
+
+#ifdef TESTPR
+    std::cout << "Default DiagnosedOrgan constructor used.\n";
+#endif
 
 }
 
 // Copying constructor
 DiagnosedOrgan::DiagnosedOrgan (DiagnosedOrgan & other) {
+    this->mOrgan = other.mOrgan;
+    this->mFrequency = mapOrganWaveRange[mOrgan];
+
+#ifdef TESTPR
+    std::cout << "Copying DiagnosedOrgan constructor used.\n";
+#endif
 
 }
 
 // Parameter constructor
-DiagnosedOrgan::DiagnosedOrgan (const DiagnosedOrgan::Organ organ, const float frequency) {
+DiagnosedOrgan::DiagnosedOrgan (const DiagnosedOrgan::Organ organ) : 
+ mOrgan (organ), mFrequency (mapOrganWaveRange[mOrgan]){
+
+#ifdef TESTPR
+    std::cout << "Parameter DiagnosedOrgan constructor used.\n";
+#endif
 
 }
 
 // Default destructor
 DiagnosedOrgan::~DiagnosedOrgan () {
 
+#ifdef TESTPR
+    std::cout << "Default DiagnosedOrgan destructor used.\n";
+#endif
+
 }
 
 // Getters
 DiagnosedOrgan::Organ DiagnosedOrgan::getOrgan () {
-
+    return mOrgan;
 }
 
 float DiagnosedOrgan::getFrequency () {
-
+    return mFrequency;
 }
 
 // Setters
 void DiagnosedOrgan::setOrgan (const Organ organ) {
-
+    this->mOrgan = organ;
+    this->mFrequency = mapOrganWaveRange[mOrgan];
 }
 
-void DiagnosedOrgan::setFrequency (const float frequency) {
-
-}
 
 // Operators
 bool DiagnosedOrgan::operator>(DiagnosedOrgan & other) {
-
+    if (this->mFrequency > other.mFrequency)
+        return true;
+    else
+        return false;
 }
 
 bool DiagnosedOrgan::operator<(DiagnosedOrgan & other) {
-
+    if (this->mFrequency < other.mFrequency)
+        return true;
+    else
+        return false;
 }
 
 DiagnosedOrgan & DiagnosedOrgan::operator= (DiagnosedOrgan & other) {
+    if (this != &other) {
+        this->mOrgan = other.mOrgan;
+        this->mFrequency = other.mFrequency;
+    }
 
+    return *this;
 }
 
 // Maps all organs to their specific wave frequency

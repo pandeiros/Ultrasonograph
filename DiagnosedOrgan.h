@@ -33,7 +33,7 @@ public:
     DiagnosedOrgan (DiagnosedOrgan & other);
 
     // Parameter constructor
-    DiagnosedOrgan (const Organ organ, const float frequency);
+    DiagnosedOrgan (const Organ organ);
 
     // Default destructor
     ~DiagnosedOrgan ();
@@ -44,11 +44,10 @@ public:
 
     // Setters
     void setOrgan (const Organ organ);
-    void setFrequency (const float frequency);
 
     // Operators
-    bool operator>(DiagnosedOrgan & other);
-    bool operator<(DiagnosedOrgan & other);
+    bool operator>(DiagnosedOrgan & other);     // Compares frequencies
+    bool operator<(DiagnosedOrgan & other);     // ...
     DiagnosedOrgan & operator= (DiagnosedOrgan & other);
 
 private:
@@ -56,6 +55,7 @@ private:
     Organ mOrgan;
 
     // Ultrasound wave frequency (in Hz)
+    // (can be only set via setOrgan() method)
     float mFrequency;
 
     // Output stream operator

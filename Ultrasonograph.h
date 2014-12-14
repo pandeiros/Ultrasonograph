@@ -19,10 +19,10 @@ public:
     Ultrasonograph ();
 
     // Copying constructor
-    Ultrasonograph (const Ultrasonograph & other);
+    Ultrasonograph (Ultrasonograph & other);
     
     // Parameter constructor
-    Ultrasonograph (const Mode mode, const std::string modelName, Monitor monitor, DiagnosedOrgan * organ = nullptr);
+    Ultrasonograph (const Mode mode, const bool hasGelHeater, const std::string modelName, Monitor monitor, DiagnosedOrgan * organ = nullptr);
 
     // Default destructor
     ~Ultrasonograph ();
@@ -38,8 +38,8 @@ public:
     void setModelName (const std::string modelName);
 
     // Operators
-    bool operator>(Ultrasonograph & other);
-    bool operator<(Ultrasonograph & other);
+    bool operator>(Ultrasonograph & other);     // Compares display modes
+    bool operator<(Ultrasonograph & other);     // ...
     Ultrasonograph & operator= (Ultrasonograph & other);
 
 private:

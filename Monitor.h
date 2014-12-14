@@ -33,8 +33,8 @@ public:
     void setSize (const unsigned int size);
 
     // Operators
-    bool operator>(Monitor & other);
-    bool operator<(Monitor & other);
+    bool operator>(Monitor & other);    // Compares display size
+    bool operator<(Monitor & other);    // ...
     Monitor & operator= (Monitor & other);
 
 private:
