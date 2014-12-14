@@ -45,7 +45,21 @@ private:
     unsigned int mSize;
 
     // Output stream operator
-    friend std::ostream& operator<< (std::ostream & out, Monitor & object);
+    friend std::ostream& operator<< (std::ostream & out, Monitor & object) {
+        out << "Monitor : ";
+
+        switch (object.mMode) {
+            case Monitor::BLACK_AND_WHITE : 
+                out << "black and white, "; break;
+            case Monitor::COLOR :
+                out << "color, "; break;
+            default :
+                out << "unknown, "; break;
+        }
+
+        out << object.mSize << " inch display.\n";
+        return out;
+    }
 };
 
 #endif

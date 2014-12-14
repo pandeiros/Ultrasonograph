@@ -59,7 +59,35 @@ private:
     float mFrequency;
 
     // Output stream operator
-    friend std::ostream& operator<< (std::ostream & out, DiagnosedOrgan & object);
+    friend std::ostream& operator<< (std::ostream & out, DiagnosedOrgan & object) {
+        out << "Organ : ";
+
+        switch (object.mOrgan) {
+            case DiagnosedOrgan::HEART :
+                out << "heart, "; break;
+            case DiagnosedOrgan::BRAIN :
+                out << "brain, "; break;
+            case DiagnosedOrgan::EYE :
+                out << "eye, "; break;
+            case DiagnosedOrgan::INTESTINE :
+                out << "intestine, "; break;
+            case DiagnosedOrgan::KIDNEY :
+                out << "kidney, "; break;
+            case DiagnosedOrgan::LIVER :
+                out << "liver, "; break;
+            case DiagnosedOrgan::PANCREAS :
+                out << "pancreas, "; break;
+            case DiagnosedOrgan::SKIN :
+                out << "skin, "; break;
+            case DiagnosedOrgan::TESTICLE :
+                out << "testicle, "; break;
+            default:
+                out << "unknown, "; break;
+        }
+
+        out << "diagnosed with " << object.mFrequency << " Hz wave.\n";
+        return out;
+    }
 };
 
 #endif

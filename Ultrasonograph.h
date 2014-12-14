@@ -27,9 +27,9 @@ public:
 
     // Copying constructor
     Ultrasonograph (Ultrasonograph & other);
-    
+
     // Parameter constructor
-    Ultrasonograph (const Mode mode, const bool hasGelHeater, const std::string modelName, 
+    Ultrasonograph (const Mode mode, const bool hasGelHeater, const std::string modelName,
                     Monitor & monitor, DiagnosedOrgan * organ = nullptr);
 
     // Default destructor
@@ -67,28 +67,34 @@ private:
     // Output stream operator
     friend std::ostream & operator<< (std::ostream & out, Ultrasonograph & object) {
         out << "Ultrasonograph : ";
-        out << object.getModelName();
+        out << object.getModelName ();
         out << ", ";
 
         switch (object.mMode) {
-            case Ultrasonograph::_2D : 
+            case Ultrasonograph::_2D:
                 out << "2D"; break;
-            case Ultrasonograph::_3D :
+            case Ultrasonograph::_3D:
                 out << "3D"; break;
-            case Ultrasonograph::_4D :
+            case Ultrasonograph::_4D:
                 out << "4D"; break;
-            default :
+            default:
                 out << "unknown"; break;
         }
 
         out << " mode";
 
-        if (object.hasGelHeater)            
-           out << " (Gel heater included)";
+        if (object.hasGelHeater)
+            out << " (Gel heater included)";
 
         out << std::endl;
-        //out << object.mMonitor << *object.pOrgan;
-          
+        out << "  > Associated ";
+        out << object.mMonitor;
+
+        if (object.pOrgan != nullptr)
+            out << "  > Associated " << *object.pOrgan << "\n";
+        else
+            out << "  > Associated Organ : none.\n\n";
+
         return out;
     }
 };

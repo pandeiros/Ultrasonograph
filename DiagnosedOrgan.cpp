@@ -80,6 +80,10 @@ DiagnosedOrgan & DiagnosedOrgan::operator= (DiagnosedOrgan & other) {
         this->mFrequency = other.mFrequency;
     }
 
+#ifdef TESTPR
+    std::cout << "DiagnosedOrgan = DiagnosedOrgan (operator= used)\n";
+#endif
+
     return *this;
 }
 

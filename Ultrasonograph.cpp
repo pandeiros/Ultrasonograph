@@ -109,5 +109,9 @@ Ultrasonograph & Ultrasonograph::operator= (Ultrasonograph & other) {
         this->pOrgan = other.pOrgan;
     }
 
+#ifdef TESTPR
+    std::cout << "Ultrasonograph = Ultrasonograph (operator= used)\n";
+#endif
+
     return *this;
 }

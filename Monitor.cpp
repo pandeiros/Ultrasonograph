@@ -79,5 +79,9 @@ Monitor & Monitor::operator= (Monitor & other) {
         this->mSize = other.mSize;
     }
 
+#ifdef TESTPR
+    std::cout << "Monitor = Monitor (operator= used)\n";
+#endif
+
     return *this;
 }
