@@ -23,7 +23,7 @@ Ultrasonograph::Ultrasonograph (Ultrasonograph & other) {
     this->hasGelHeater = other.hasGelHeater;
 
     this->mMonitor = other.mMonitor;
-    this->pOrgan = other.pOrgan;
+    this->pOrgan = new DiagnosedOrgan (*other.pOrgan);
 
     ++ObjectCount;
 
@@ -49,7 +49,7 @@ Ultrasonograph::Ultrasonograph (const Mode mode, const bool hasGelHeater, const 
 
 // Default destructor
 Ultrasonograph::~Ultrasonograph () {
-  
+    delete pOrgan;
     --ObjectCount;
 
 #ifdef TESTPR
